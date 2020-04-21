@@ -11,12 +11,13 @@ function makePageForEpisodes(episodeList) {
   rootElem.textContent = `Got ${episodeList.length} episode(s)`;
 }
 function showEpisodeInfo(Episode){
-  const rootElem = document.getElementById("root");
+  const divElem = document.querySelector(".container");
   const episodeEleDiv=document.createElement('div')
   const episodeNameEleP= document.createElement('p')
   const episodeImg=document.createElement('img')
   const episodeSummaryEleP=document.createElement('p')
-  rootElem.append(episodeEleDiv)
+  episodeEleDiv.classList.add('episode')
+  divElem.append(episodeEleDiv)
   episodeEleDiv.append(episodeNameEleP,episodeImg,episodeSummaryEleP)
   const showName=Episode.name
   const seasonNo=Episode.season.toString().padStart(2,'0')
