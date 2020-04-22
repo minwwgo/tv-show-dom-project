@@ -3,6 +3,7 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
   showAllEpisodeInfo(allEpisodes);
+  select(allEpisodes)
 }
 
 function makePageForEpisodes(episodeList) {
@@ -26,7 +27,6 @@ function showEpisodeInfo(Episode) {
   episodeNameEleP.textContent = `${showName} - S${seasonNo} E${EpisodeNo}`;
   episodeImg.setAttribute("src", `${Episode.image.medium}`);
   episodeSummaryEleP.innerHTML = `${Episode.summary}`;
-  
 }
 function showAllEpisodeInfo(episodeList) {
   return episodeList.forEach((episode) => showEpisodeInfo(episode));
@@ -36,49 +36,83 @@ function search(e) {
   e.preventDefault();
   const searchInfo = form.searchbox.value.toLowerCase();
   const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
   showMatchEpisodeInfo(allEpisodes, searchInfo);
-  
 }
 
 function showMatchEpisodeInfo(episodeList, searchInfo) {
-const matchingEpisode = episodeList.filter((episode) => {
+  const matchingEpisode = episodeList.filter((episode) => {
     const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
     const matchEpisodeSummary = episode.summary
       .toLowerCase()
       .includes(searchInfo);
     if (matchEpisodeName || matchEpisodeSummary) {
-      
-       return episode
-      }
+      return episode;
+    }
   });
   document.querySelector(
     ".searchList"
   ).innerHTML = `Displaying ${matchingEpisode.length}/ ${episodeList.length}episodes`;
-  return  displaySearchEpisode(matchingEpisode);
+  return displaySearchEpisode(matchingEpisode);
 }
-  
 
 const displaySearchEpisode = (episodeList) => {
-  const htmlString = episodeList
-      .map((episode) => {
-          return `<div class="episode">
+  const htmlString = episodeList.map((episode) => {
+    return `<div class="episode">
               <p class="episode-title">${
                 episode.name
               }-S${episode.season
-        .toString()
-        .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}</p>
+      .toString()
+      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}</p>
               <img src='${episode.image.medium}'></img>
               <p class='episode-summary'>${episode.summary}</p>
-            </div>`
-      })
-      
-  document.querySelector('.container').innerHTML = htmlString;
+            </div>`;
+  });
+
+  document.querySelector(".container").innerHTML = htmlString;
 };
 
 const form = document.querySelector(".searchform");
 form.addEventListener("submit", (e) => search(e));
 
- form.addEventListener('keyup', (e)=>search(e))
+form.addEventListener("keyup", (e) => search(e));
+
+const selectForm= document.getElementById('select')
+
+function select(episodeList){
+episodeList.forEach(episode=>{
+  
+  const option=document.createElement('option')
+  selectForm.append(option)
+  option.innerHTML=`${
+  episode.name
+}-S${episode.season
+.toString()
+.padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}
+`
+})}
+
+selectForm.addEventListener('change', (e)=>{
+  
+  const episode = e.target.value
+  if(episode){
+    console.log(episode)
+    
+    
+  }
+  console.log(episode)
+})
+
+
+function selectDisplay(episode){
+  return `<div class="episode">
+              <p class="episode-title">${
+                episode.name
+              }-S${episode.season
+      .toString()
+      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}</p>
+              <img src='${episode.image.medium}'></img>
+              <p class='episode-summary'>${episode.summary}</p>
+            </div>`;
+}
 
 window.onload = setup;

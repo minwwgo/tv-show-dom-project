@@ -9,14 +9,22 @@
   </head>
 
   <body>
-    <form action="submit" class="searchform">
-      <input type="text" name="searchbox" placeholder="search" />
-      <p class="searchList"></p>
-    </form>
+    <div class='holder'>
+      <select name="episodeListHolder" id="select">
+        
+      </select>
+      <form action="submit" class="searchform">
+        <input type="text" name="searchbox" placeholder="search" />
+        <p class="searchList"></p>
+      </form>
+    </div>
+    
     
     <a href="https://www.tvmaze.com/"> all the data originally come from </a>
     <div id="root"></div>
-    <div class="container"></div>
+    <div class="container">
+
+    </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
