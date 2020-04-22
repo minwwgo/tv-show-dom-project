@@ -1,12 +1,15 @@
 //You can edit ALL of the code here
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
-  showAllEpisodeInfo(allEpisodes);
-  select(allEpisodes);
-  selectEpisodeInfo(allEpisodes);
+  // const allEpisodes = getAllEpisodes();
+  // makePageForEpisodes(allEpisodes);
+  // showAllEpisodeInfo(allEpisodes);
+  // select(allEpisodes);
+  // selectEpisodeInfo(allEpisodes);
+  
   const allShowList = getAllShows();
   allShowInfo(allShowList)
+  selectShow(allShowList)
+  
 }
 
 
@@ -76,11 +79,13 @@ const displaySearchEpisode = (episodeList) => {
 };
 
 const form = document.querySelector(".searchform");
+
 form.addEventListener("submit", (e) => search(e));
 
 form.addEventListener("keyup", (e) => search(e));
 
 const selectForm = document.getElementById("select");
+
 
 function select(episodeList) {
   episodeList.forEach((episode) => {
@@ -98,7 +103,6 @@ function select(episodeList) {
 
 function selectEpisodeInfo(episodeList) {
   selectForm.addEventListener("change", (e) => {
-    console.log(e.target.value);
     const selectMatchEpisode = episodeList.filter((episode) => {
       if (episode.name.toLowerCase().includes(e.target.value.toLowerCase())) {
         return episode;
@@ -115,11 +119,31 @@ const shows = document.getElementById('shows')
 function oneShowInfo(show){
   const showOptionEle = document.createElement('option')
   shows.append(showOptionEle)
+  showOptionEle.setAttribute("value",`${show.id}`)
   showOptionEle.innerHTML=show.name
 
 }
 function allShowInfo(showList){
 showList.forEach(show=>oneShowInfo(show))
+}
+
+function selectShow(showList){
+ shows.addEventListener('change',(e)=>{
+   showList.filter(show => {
+     if (e.target.value == show.id){
+      return showEpisodeDisplay(show.id)
+     }
+   })
+  })
+}
+
+function showEpisodeDisplay(showId){
+  fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
+  .then(res =>res.json())
+    .then(data=>{
+      showAllEpisodeInfo(data)
+      select(data)
+    })
 }
 
 
