@@ -97,8 +97,7 @@ function selectEpisodeInfo(episodeList){
     const selectMatchEpisode = episodeList.filter(episode =>{
       if(episode.name.toLowerCase().includes(e.target.value.toLowerCase())){
          return episode
-        
-      }
+        }
     })
     return  displaySearchEpisode(selectMatchEpisode)
   })
