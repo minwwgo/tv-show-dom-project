@@ -4,8 +4,11 @@ function setup() {
   makePageForEpisodes(allEpisodes);
   showAllEpisodeInfo(allEpisodes);
   select(allEpisodes);
-  selectEpisodeInfo(allEpisodes)
+  selectEpisodeInfo(allEpisodes);
+  const allShowList = getAllShows();
+  allShowInfo(allShowList)
 }
+
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
@@ -82,25 +85,41 @@ const selectForm = document.getElementById("select");
 function select(episodeList) {
   episodeList.forEach((episode) => {
     const option = document.createElement("option");
-    option.setAttribute('value',`${episode.name}`)
+    option.setAttribute("value", `${episode.name}`);
     selectForm.append(option);
     option.innerHTML = `S${episode.season
       .toString()
-      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}-${episode.name}
+      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}-${
+      episode.name
+    }
 `;
   });
 }
 
-function selectEpisodeInfo(episodeList){
+function selectEpisodeInfo(episodeList) {
   selectForm.addEventListener("change", (e) => {
-    console.log(e.target.value)
-    const selectMatchEpisode = episodeList.filter(episode =>{
-      if(episode.name.toLowerCase().includes(e.target.value.toLowerCase())){
-         return episode
-        }
-    })
-    return  displaySearchEpisode(selectMatchEpisode)
-  })
+    console.log(e.target.value);
+    const selectMatchEpisode = episodeList.filter((episode) => {
+      if (episode.name.toLowerCase().includes(e.target.value.toLowerCase())) {
+        return episode;
+      }
+    });
+    return displaySearchEpisode(selectMatchEpisode);
+  });
+}
+
+
+
+const shows = document.getElementById('shows')
+
+function oneShowInfo(show){
+  const showOptionEle = document.createElement('option')
+  shows.append(showOptionEle)
+  showOptionEle.innerHTML=show.name
+
+}
+function allShowInfo(showList){
+showList.forEach(show=>oneShowInfo(show))
 }
 
 
