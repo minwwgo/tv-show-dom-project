@@ -3,7 +3,8 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
   showAllEpisodeInfo(allEpisodes);
-  select(allEpisodes)
+  select(allEpisodes);
+  selectEpisodeInfo(allEpisodes)
 }
 
 function makePageForEpisodes(episodeList) {
@@ -76,43 +77,33 @@ form.addEventListener("submit", (e) => search(e));
 
 form.addEventListener("keyup", (e) => search(e));
 
-const selectForm= document.getElementById('select')
+const selectForm = document.getElementById("select");
 
-function select(episodeList){
-episodeList.forEach(episode=>{
-  
-  const option=document.createElement('option')
-  selectForm.append(option)
-  option.innerHTML=`${
-  episode.name
-}-S${episode.season
-.toString()
-.padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}
-`
-})}
-
-selectForm.addEventListener('change', (e)=>{
-  
-  const episode = e.target.value
-  if(episode){
-    console.log(episode)
-    
-    
-  }
-  console.log(episode)
-})
-
-
-function selectDisplay(episode){
-  return `<div class="episode">
-              <p class="episode-title">${
-                episode.name
-              }-S${episode.season
+function select(episodeList) {
+  episodeList.forEach((episode) => {
+    const option = document.createElement("option");
+    option.setAttribute('value',`${episode.name}`)
+    selectForm.append(option);
+    option.innerHTML = `S${episode.season
       .toString()
-      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}</p>
-              <img src='${episode.image.medium}'></img>
-              <p class='episode-summary'>${episode.summary}</p>
-            </div>`;
+      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}-${episode.name}
+`;
+  });
 }
+
+function selectEpisodeInfo(episodeList){
+  selectForm.addEventListener("change", (e) => {
+    console.log(e.target.value)
+    const selectMatchEpisode = episodeList.filter(episode =>{
+      if(episode.name.toLowerCase().includes(e.target.value.toLowerCase())){
+         return episode
+        
+      }
+    })
+    return  displaySearchEpisode(selectMatchEpisode)
+  })
+}
+
+
 
 window.onload = setup;
