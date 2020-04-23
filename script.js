@@ -1,18 +1,17 @@
 //You can edit ALL of the code here
 function setup() {
-   //const allEpisodes = getAllEpisodes();
-
-   makePageForEpisodes(allEpisodes);
-   showAllEpisodeInfo(allEpisodes);
-   showMatchEpisodeInfo(allEpisodes)
+   const allEpisodes = getAllEpisodes();
+    makePageForEpisodes(allEpisodes);
+    showAllEpisodeInfo(allEpisodes);
+    showMatchEpisodeInfo(allEpisodes)
+    searchingEpisode(allEpisodes)
     select(allEpisodes);
     selectEpisodeInfo(allEpisodes);
-
-  const allShowList = getAllShows();
-  allShowInfo(allShowList)
-  selectShow(allShowList)
-  
-  sortOption()
+    const allShowList = getAllShows();
+    allShowInfo(allShowList)
+    selectShow(allShowList)
+    
+    sortOption()
   
 }
 
@@ -45,6 +44,8 @@ function showAllEpisodeInfo(episodeList) {
 
 
 function showMatchEpisodeInfo(episodeList) {
+  const form = document.querySelector(".searchform");
+
   const matchingEpisode = episodeList.filter((episode) => {
   const searchInfo = form.searchbox.value.toLowerCase();
   const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
@@ -74,16 +75,37 @@ const displaySearchEpisode = (episodeList) => {
               <p class='episode-summary'>${episode.summary}</p>
             </div>`;
   });
-
+  
   document.querySelector(".container").innerHTML = htmlString;
 };
 
-const form = document.querySelector(".searchform");
-//const allEpisodes = getAllEpisodes();
+// const form = document.querySelector(".searchform");
+// const allEpisodes = getAllEpisodes();
 // form.addEventListener("submit",()=> (showMatchEpisodeInfo(allEpisodes)));
-form.addEventListener("keyup",()=>  (showMatchEpisodeInfo(allEpisodes)));
+// form.addEventListener("keyup",()=>  (showMatchEpisodeInfo(allEpisodes)));
 // form.addEventListener("change",()=> (showMatchEpisodeInfo(allEpisodes)));
+function searchingEpisode(episodeList){
+  const form = document.querySelector(".searchform");
+    form.addEventListener('keyup',()=>{
+        const matchingEpisode = episodeList.filter((episode) => {
+        const searchInfo = form.searchbox.value.toLowerCase();
+        const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
+        const matchEpisodeSummary = episode.summary
+            .toLowerCase()
+            .includes(searchInfo);
+          if (matchEpisodeName || matchEpisodeSummary) {
+            return episode;
+          }
 
+      });
+      document.querySelector(
+        ".searchList"
+      ).innerHTML = `Displaying ${matchingEpisode.length}/ ${episodeList.length}episodes`;
+    
+      return displaySearchEpisode(matchingEpisode)
+  })
+  
+}
 
 
 function select(episodeList) {
@@ -129,12 +151,20 @@ showList.forEach(show=>oneShowInfo(show))
 
 function selectShow(showList){
  shows.addEventListener('change',(e)=>{
+
+   let showEpisode = document.getElementById('select')
+
+   while (showEpisode.firstChild) {
+    showEpisode.removeChild(showEpisode.lastChild);
+  }
    
    showList.filter(show => {
      if (e.target.value == show.id){
-      return showEpisodeDisplay(show.id)
+      // return showEpisodeDisplay(show.id)
+      return fetchDataList = showEpisodeDisplay(show.id)
      }
    })
+   
   })
 }
 
@@ -146,9 +176,12 @@ function showEpisodeDisplay(showId){
       showMatchEpisodeInfo(data)
       select(data)
       selectEpisodeInfo(data);
+      searchingEpisode(data)
+      
     })
+    
 }
-
+console.log()
 function sortOption(){
   const shows = document.getElementById('shows')
   const sortedOption=Array.from(shows.options).sort((a,b)=>{
