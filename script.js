@@ -1,13 +1,18 @@
 //You can edit ALL of the code here
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
-  showAllEpisodeInfo(allEpisodes);
-  select(allEpisodes);
-  selectEpisodeInfo(allEpisodes);
-  // const allShowList = getAllShows();
-  // allShowInfo(allShowList)
-  // selectShow(allShowList)
+   //const allEpisodes = getAllEpisodes();
+
+   makePageForEpisodes(allEpisodes);
+   showAllEpisodeInfo(allEpisodes);
+   showMatchEpisodeInfo(allEpisodes)
+    select(allEpisodes);
+    selectEpisodeInfo(allEpisodes);
+
+  const allShowList = getAllShows();
+  allShowInfo(allShowList)
+  selectShow(allShowList)
+  
+  sortOption()
   
 }
 
@@ -38,17 +43,12 @@ function showAllEpisodeInfo(episodeList) {
   return episodeList.forEach((episode) => showEpisodeInfo(episode));
 }
 
-function search(e) {
-  e.preventDefault();
-  const searchInfo = form.searchbox.value.toLowerCase();
-  const allEpisodes = getAllEpisodes();
-  showMatchEpisodeInfo(allEpisodes, searchInfo);
-}
 
-function showMatchEpisodeInfo(episodeList, searchInfo) {
+function showMatchEpisodeInfo(episodeList) {
   const matchingEpisode = episodeList.filter((episode) => {
-    const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
-    const matchEpisodeSummary = episode.summary
+  const searchInfo = form.searchbox.value.toLowerCase();
+  const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
+  const matchEpisodeSummary = episode.summary
       .toLowerCase()
       .includes(searchInfo);
     if (matchEpisodeName || matchEpisodeSummary) {
@@ -60,6 +60,7 @@ function showMatchEpisodeInfo(episodeList, searchInfo) {
   ).innerHTML = `Displaying ${matchingEpisode.length}/ ${episodeList.length}episodes`;
   return displaySearchEpisode(matchingEpisode);
 }
+
 
 const displaySearchEpisode = (episodeList) => {
   const htmlString = episodeList.map((episode) => {
@@ -78,15 +79,15 @@ const displaySearchEpisode = (episodeList) => {
 };
 
 const form = document.querySelector(".searchform");
+//const allEpisodes = getAllEpisodes();
+// form.addEventListener("submit",()=> (showMatchEpisodeInfo(allEpisodes)));
+form.addEventListener("keyup",()=>  (showMatchEpisodeInfo(allEpisodes)));
+// form.addEventListener("change",()=> (showMatchEpisodeInfo(allEpisodes)));
 
-form.addEventListener("submit", (e) => search(e));
-
-form.addEventListener("keyup", (e) => search(e));
-
-const selectForm = document.getElementById("select");
 
 
 function select(episodeList) {
+  const selectForm = document.getElementById("select");
   episodeList.forEach((episode) => {
     const option = document.createElement("option");
     option.setAttribute("value", `${episode.name}`);
@@ -101,6 +102,7 @@ function select(episodeList) {
 }
 
 function selectEpisodeInfo(episodeList) {
+  const selectForm = document.getElementById("select");
   selectForm.addEventListener("change", (e) => {
     const selectMatchEpisode = episodeList.filter((episode) => {
       if (episode.name.toLowerCase().includes(e.target.value.toLowerCase())) {
@@ -111,11 +113,8 @@ function selectEpisodeInfo(episodeList) {
   });
 }
 
-
-
-const shows = document.getElementById('shows')
-
 function oneShowInfo(show){
+  const shows = document.getElementById('shows')
   const showOptionEle = document.createElement('option')
   shows.append(showOptionEle)
   showOptionEle.setAttribute("value",`${show.id}`)
@@ -123,12 +122,14 @@ function oneShowInfo(show){
   
 
 }
+
 function allShowInfo(showList){
 showList.forEach(show=>oneShowInfo(show))
 }
 
 function selectShow(showList){
  shows.addEventListener('change',(e)=>{
+   
    showList.filter(show => {
      if (e.target.value == show.id){
       return showEpisodeDisplay(show.id)
@@ -142,13 +143,21 @@ function showEpisodeDisplay(showId){
   .then(res =>res.json())
     .then(data=>{
       showAllEpisodeInfo(data)
-
+      showMatchEpisodeInfo(data)
       select(data)
-      makePageForEpisodes(data);
       selectEpisodeInfo(data);
     })
 }
 
+function sortOption(){
+  const shows = document.getElementById('shows')
+  const sortedOption=Array.from(shows.options).sort((a,b)=>{
+    if(a.text < b.text)return -1;
+    if(a.text > b.text)return 1;
+    return 0;
+  })
+  sortedOption.forEach(option => shows.add(option))
+}
 
 
 
