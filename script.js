@@ -131,6 +131,10 @@ function selectEpisodeInfo(episodeList) {
         return episode;
       }
     });
+    document.querySelector(
+      ".searchList"
+    ).innerHTML = `Displaying ${selectMatchEpisode.length}/ ${episodeList.length}episodes`;
+  
     return displaySearchEpisode(selectMatchEpisode);
   });
 }
