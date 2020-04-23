@@ -5,9 +5,9 @@ function setup() {
   showAllEpisodeInfo(allEpisodes);
   select(allEpisodes);
   selectEpisodeInfo(allEpisodes);
-  const allShowList = getAllShows();
-  allShowInfo(allShowList)
-  selectShow(allShowList)
+  // const allShowList = getAllShows();
+  // allShowInfo(allShowList)
+  // selectShow(allShowList)
   
 }
 
@@ -120,6 +120,7 @@ function oneShowInfo(show){
   shows.append(showOptionEle)
   showOptionEle.setAttribute("value",`${show.id}`)
   showOptionEle.innerHTML=show.name
+  
 
 }
 function allShowInfo(showList){
@@ -141,11 +142,13 @@ function showEpisodeDisplay(showId){
   .then(res =>res.json())
     .then(data=>{
       showAllEpisodeInfo(data)
+
       select(data)
       makePageForEpisodes(data);
       selectEpisodeInfo(data);
     })
 }
+
 
 
 
