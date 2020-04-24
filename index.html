@@ -1,58 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>TV Show Project | MinKo (minwwgo)</title>
-    <link rel="stylesheet" type="text/css" href="grid.css" />
+    <link rel='stylesheet' type='text/css' href='grid.css' />
 
-    <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link href='style.css' rel='stylesheet' />
+    <link rel='icon' href='/favicon.ico' type='image/x-icon' />
   </head>
 
   <body>
-    <div class="container search-box">
-      <h1>    <a href="https://www.tvmaze.com/"> all the data originally come from tvmaze.com </a>
+    <div class='container search-box'>
+      <h1>    <a href='https://www.tvmaze.com/'> all the data originally come from tvmaze.com </a>
       </h1>
-      <div class="row">
-        <div class="col-12 sm-col-12 md-col-12 lg-col-6 holder">
-            <label for="shows"> Select show :</label>
-            <select id="shows" name="showListHolder">
-              <option value="" id="selectAllShow">-All shows</option>
+      <div class='row'>
+        <div class='col-12 sm-col-12 md-col-12 lg-col-6 holder'>
+            <label for='shows'> Select show :</label>
+            <select id='shows' name='showListHolder'>
+              <option value='' id='selectAllShow'>-All shows</option>
             </select>
           </div>
-          <div class="col-12 sm-col-12 md-col-12 lg-col-6 holder">
-            <label for=""> Select episode :</label>
-            <select name="episodeListHolder" id="select">
-              <option value="" id="selectAll">All episodes</option>
+          <div class='col-12 sm-col-12 md-col-12 lg-col-6 holder'>
+            <label for=''> Select episode :</label>
+            <select name='episodeListHolder' id='select'>
+              <option value='' id='selectAll'>All episodes</option>
             </select>
           </div>
-          <div class="col-12 sm-col-12 md-col-12 lg-col-12 holder">
-            <div class="search-input">
-              <label for=""> Search: </label>
+          <div class='col-12 sm-col-12 md-col-12 lg-col-12 holder'>
+            <div class='search-input'>
+              <label for=''> Search: </label>
               <input
-                class="input-search"
-                type="text"
-                name="searchbox"
-                placeholder="search"
+                class='input-search'
+                type='text'
+                name='searchbox'
+                placeholder='search'
               />
-              <p class="searchList"></p>
+              <p class='searchList'></p>
             </div>
           </div>
         </div>
     </div>
     
-    <div class="container">
-      <div class="row show-start">
+    <div class='container'>
+      <div class='row show-start'>
          
       </div>
     </div>
     
-    <script src="shows.js"></script>
+    <script src='shows.js'></script>
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <script src='episodes.js'></script>
 
     <!-- Loads YOUR javascript code -->
-    <script src="script.js"></script>
+    <script src='script.js'></script>
   </body>
 </html>
