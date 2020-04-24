@@ -9,7 +9,6 @@ function setup() {
     const allShowList = getAllShows();
     allShowInfo(allShowList)
     selectShow(allShowList)
-    
     sortOption()
     // const showOne = getOneShow();
     // oneShowDisplay(showOne)
@@ -17,23 +16,36 @@ function setup() {
 
 function showEpisodeInfo(Episode) {
   const divElem = document.querySelector(".show-start");
+
   const episodeEleDiv = document.createElement("div");
+
   const episodeNameEleP = document.createElement("p");
+
   const episodeImg = document.createElement("img");
-  const episodeSummaryEleP = document.createElement("p");
-  episodeEleDiv.classList.add('episode')
-  episodeEleDiv.classList.add('lg-col-4')
-  console.log(episodeEleDiv)
+
+  const episodeSummaryEleP = document.createElement("div");
+
+  episodeEleDiv.classList.add('episode','lg-col-4')
+
   episodeNameEleP.classList.add("episode-title");
+
   episodeSummaryEleP.classList.add("episode-summary");
+
   divElem.append(episodeEleDiv);
-  episodeEleDiv.append(episodeNameEleP, episodeImg, episodeSummaryEleP);
+
+  episodeEleDiv.append(episodeNameEleP,episodeImg,episodeSummaryEleP);
+
   const showName = Episode.name;
   const seasonNo = Episode.season.toString().padStart(2, "0");
+
   const EpisodeNo = Episode.number.toString().padStart(2, "0");
+
   episodeNameEleP.textContent = `${showName} - S${seasonNo} E${EpisodeNo}`;
+
   episodeImg.setAttribute("src", `${Episode.image.medium}`);
+
   episodeSummaryEleP.innerHTML = `${Episode.summary}`;
+
 }
 function showAllEpisodeInfo(episodeList) {
   return episodeList.forEach((episode) => showEpisodeInfo(episode));
@@ -52,6 +64,7 @@ function showMatchEpisodeInfo(episodeList) {
       return episode;
     }
   });
+
   document.querySelector(
     ".searchList"
   ).innerHTML = `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
@@ -60,18 +73,18 @@ function showMatchEpisodeInfo(episodeList) {
 
 
 const displaySearchEpisode = (episodeList) => {
+
   const htmlString = episodeList.map((episode) => {
-    return `<div class="col-12 sm-col-12 md-col-12 lg-col-3 episode">
-              <p class="episode-title">${
-                episode.name
-              }-S${episode.season
-      .toString()
-      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}</p>
-              <img src='${episode.image.medium}'></img>
-              <p class='episode-summary'>${episode.summary}</p>
-            </div>`;
+
+    return`<div class="col-12 sm-col-12 md-col-12 lg-col-3 episode">
+      <p class="episode-title">${episode.name}-S${episode.season.toString()
+      .padStart(2,"0")}-E${episode.number.toString().padStart(2, "0")}</p>
+              
+      <img src='${episode.image.medium}'></img>
+      <div class='episode-summary'>${episode.summary}</div>
+      </div>`
   });
-  
+
   document.querySelector(".show-start").innerHTML = htmlString;
 };
 
@@ -104,14 +117,12 @@ function select(episodeList) {
   const selectForm = document.getElementById("select");
   episodeList.forEach((episode) => {
     const option = document.createElement("option");
-    option.setAttribute("value", `${episode.name}`);
+    option.setAttribute("value",`${episode.name}`);
     selectForm.append(option);
-    option.innerHTML = `S${episode.season
+    option.innerHTML =`S${episode.season
       .toString()
-      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}-${
-      episode.name
-    }
-`;
+      .padStart(2, "0")}-E${episode.number.toString().padStart(2, "0")}-
+      ${episode.name}`;
   });
 }
 
@@ -178,6 +189,9 @@ function showEpisodeDisplay(showId){
       searchingEpisode(data)
       
     })
+    .catch(error =>{
+      console.log(error)
+    })
     
 }
 console.log()
@@ -194,7 +208,8 @@ function sortOption(){
 function oneShowDisplay(show){
   const showHolder = document.querySelector(".show-start");
   const showName  = document.createElement('h1');
-  const showNameTxt= document.createTextNode(`${show.name}`)
+  const showNameTxt= document.createTextNode(`
+  ${show.name}`)
   showName.appendChild(showNameTxt)
   const showContent = document.createElement('div')
   const showImage = document.createElement('img');
