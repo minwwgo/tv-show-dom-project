@@ -201,7 +201,7 @@ function oneShowDisplay(show) {
   // const showSummary= document.createElement('p')
   // const showDescription= document.createElement('ul')
   // showHolder.append(showName,showImage,showSummary,showDescription)
-  showHolder.append(showName, showImage);
+  showHolder.append(showName,showImage);
   console.log(showNameTxt);
 }
 
