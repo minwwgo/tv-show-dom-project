@@ -1,7 +1,6 @@
 //You can edit ALL of the code here
 function setup() {
    const allEpisodes = getAllEpisodes();
-    makePageForEpisodes(allEpisodes);
     showAllEpisodeInfo(allEpisodes);
     showMatchEpisodeInfo(allEpisodes)
     searchingEpisode(allEpisodes)
@@ -12,21 +11,17 @@ function setup() {
     selectShow(allShowList)
     
     sortOption()
-  
+    // const showOne = getOneShow();
+    // oneShowDisplay(showOne)
 }
 
-
-function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
-  rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-}
 function showEpisodeInfo(Episode) {
-  const divElem = document.querySelector(".container");
+  const divElem = document.querySelector(".show-start");
   const episodeEleDiv = document.createElement("div");
   const episodeNameEleP = document.createElement("p");
   const episodeImg = document.createElement("img");
   const episodeSummaryEleP = document.createElement("p");
-  episodeEleDiv.classList.add("episode");
+  episodeEleDiv.classList.add('lg-col-4')
   episodeNameEleP.classList.add("episode-title");
   episodeSummaryEleP.classList.add("episode-summary");
   divElem.append(episodeEleDiv);
@@ -44,10 +39,9 @@ function showAllEpisodeInfo(episodeList) {
 
 
 function showMatchEpisodeInfo(episodeList) {
-  const form = document.querySelector(".searchform");
-
+  const input = document.querySelector(".input-search");
   const matchingEpisode = episodeList.filter((episode) => {
-  const searchInfo = form.searchbox.value.toLowerCase();
+  const searchInfo = input.value.toLowerCase();
   const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
   const matchEpisodeSummary = episode.summary
       .toLowerCase()
@@ -58,14 +52,14 @@ function showMatchEpisodeInfo(episodeList) {
   });
   document.querySelector(
     ".searchList"
-  ).innerHTML = `Displaying ${matchingEpisode.length}/ ${episodeList.length}episodes`;
+  ).innerHTML = `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
   return displaySearchEpisode(matchingEpisode);
 }
 
 
 const displaySearchEpisode = (episodeList) => {
   const htmlString = episodeList.map((episode) => {
-    return `<div class="episode">
+    return `<div class="col-12 sm-col-12 md-col-12 lg-col-3 episode">
               <p class="episode-title">${
                 episode.name
               }-S${episode.season
@@ -76,19 +70,15 @@ const displaySearchEpisode = (episodeList) => {
             </div>`;
   });
   
-  document.querySelector(".container").innerHTML = htmlString;
+  document.querySelector(".show-start").innerHTML = htmlString;
 };
 
-// const form = document.querySelector(".searchform");
-// const allEpisodes = getAllEpisodes();
-// form.addEventListener("submit",()=> (showMatchEpisodeInfo(allEpisodes)));
-// form.addEventListener("keyup",()=>  (showMatchEpisodeInfo(allEpisodes)));
-// form.addEventListener("change",()=> (showMatchEpisodeInfo(allEpisodes)));
+
 function searchingEpisode(episodeList){
-  const form = document.querySelector(".searchform");
-    form.addEventListener('keyup',()=>{
+  const input = document.querySelector(".input-search");
+    input.addEventListener('keyup',()=>{
         const matchingEpisode = episodeList.filter((episode) => {
-        const searchInfo = form.searchbox.value.toLowerCase();
+        const searchInfo = input.value.toLowerCase();
         const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
         const matchEpisodeSummary = episode.summary
             .toLowerCase()
@@ -100,7 +90,7 @@ function searchingEpisode(episodeList){
       });
       document.querySelector(
         ".searchList"
-      ).innerHTML = `Displaying ${matchingEpisode.length}/ ${episodeList.length}episodes`;
+      ).innerHTML = `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
     
       return displaySearchEpisode(matchingEpisode)
   })
@@ -133,12 +123,12 @@ function selectEpisodeInfo(episodeList) {
     });
     document.querySelector(
       ".searchList"
-    ).innerHTML = `Displaying ${selectMatchEpisode.length}/ ${episodeList.length}episodes`;
+    ).innerHTML = `Displaying ${selectMatchEpisode.length} / ${episodeList.length} episodes`;
   
     return displaySearchEpisode(selectMatchEpisode);
   });
 }
-
+//lv004
 function oneShowInfo(show){
   const shows = document.getElementById('shows')
   const showOptionEle = document.createElement('option')
@@ -157,15 +147,17 @@ function selectShow(showList){
  shows.addEventListener('change',(e)=>{
 
    let showEpisode = document.getElementById('select')
-
-   while (showEpisode.firstChild) {
-    showEpisode.removeChild(showEpisode.lastChild);
+  while (showEpisode.firstChild) {
+     showEpisode.removeChild(showEpisode.lastChild);
   }
+  const episodeOption=document.createElement('option')
+   showEpisode.append(episodeOption)
+   episodeOption.textContent = 'All Episodes'
+   episodeOption.setAttribute('value','')
    
    showList.filter(show => {
      if (e.target.value == show.id){
-      // return showEpisodeDisplay(show.id)
-      return fetchDataList = showEpisodeDisplay(show.id)
+      return showEpisodeDisplay(show.id)
      }
    })
    
@@ -176,6 +168,7 @@ function showEpisodeDisplay(showId){
   fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
   .then(res =>res.json())
     .then(data=>{
+      
       showAllEpisodeInfo(data)
       showMatchEpisodeInfo(data)
       select(data)
@@ -195,7 +188,22 @@ function sortOption(){
   })
   sortedOption.forEach(option => shows.add(option))
 }
+//lv005
+function oneShowDisplay(show){
+  const showHolder = document.querySelector(".show-start");
 
+  const showName  = document.createElement('h1');
+  const showNameTxt= document.createTextNode(`${show.name}`)
+  showName.appendChild(showNameTxt)
+  const showContent = document.createElement('div')
+  const showImage = document.createElement('img');
+  showImage.setAttribute('src',`${show.image.medium}`)
+  // const showSummary= document.createElement('p')
+  // const showDescription= document.createElement('ul')
+  // showHolder.append(showName,showImage,showSummary,showDescription)
+  showHolder.append(showName,showImage)
+  console.log(showNameTxt)
+}
 
 
 window.onload = setup;

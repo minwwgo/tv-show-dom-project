@@ -4,49 +4,40 @@ body{
   margin:0;
   padding:0;
   box-sizing: border-box;
-  background:whitesmoke;
-}
-#root {
-  color: red;
-}
-.container{
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width:80%;
-  text-align: center;
-  margin:0 auto;
+  background-color:#FFF1BE;
   
+}
+input,select{
+  border:1px solid black;
+  border-radius: 5px;
+  width:50%;
+  font-size:1rem;
+  font-weight: bolder;
+}
+img{
+  width:100%
+}
+
+.search-input{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.search-input input{
+  margin:0 10px;
 }
 
 .episode{
-  margin:10px;
-  width: 25%;
-  background:lightskyblue;
-  border-radius: 10px;
-  height:500px;
-  
-}
-.episode-title{
-  border: 2px solid black;
-  border-radius: 10px;
-  margin:0px 0px 15px 0px;
-  height:50px;
-}
-
-form{
-  display:flex;
-  margin:40px;
-  justify-content:flex-start;
-  align-items: center;
-}
-input{
-  height:30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #26191b;
   text-align: center;
-  font-size: 20px;
+  margin:5px auto;
 }
-.holder{
-  display:flex;
-  margin-left:40px;
-  align-items: center;
+p{
+  color:white;
+}
+.searchList{
+  color:black;
 }
