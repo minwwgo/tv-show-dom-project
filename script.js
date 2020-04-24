@@ -21,7 +21,9 @@ function showEpisodeInfo(Episode) {
   const episodeNameEleP = document.createElement("p");
   const episodeImg = document.createElement("img");
   const episodeSummaryEleP = document.createElement("p");
+  episodeEleDiv.classList.add('episode')
   episodeEleDiv.classList.add('lg-col-4')
+  console.log(episodeEleDiv)
   episodeNameEleP.classList.add("episode-title");
   episodeSummaryEleP.classList.add("episode-summary");
   divElem.append(episodeEleDiv);
@@ -191,7 +193,6 @@ function sortOption(){
 //lv005
 function oneShowDisplay(show){
   const showHolder = document.querySelector(".show-start");
-
   const showName  = document.createElement('h1');
   const showNameTxt= document.createTextNode(`${show.name}`)
   showName.appendChild(showNameTxt)
