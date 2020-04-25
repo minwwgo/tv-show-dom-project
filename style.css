@@ -23,8 +23,10 @@ img{
   justify-content: center;
   align-items: center;
   text-align: center;
+  
 }
 .search-input input{
+  width:100%;
   margin:0 10px;
 }
 
@@ -33,11 +35,20 @@ img{
   border-radius: 5px;
   background-color: #26191b;
   text-align: center;
-  margin:5px auto;
+  margin-top:3px;
 }
-p{
+ .episode-summary{
   color:white;
 }
-.searchList{
+.episode-title{
+  background-color:wheat;
   color:black;
+  width:100%;
+  padding:5px;
+  text-align: center;
+  margin:3px auto;
+}
+.holder{
+  display:flex;
+
 }

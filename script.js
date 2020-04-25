@@ -16,32 +16,31 @@ function setup() {
 
 function showEpisodeInfo(Episode) {
   const divElem = document.querySelector('.show-start');
-  
   const episodeEleDiv = document.createElement('div');
   const episodeNameEleP = document.createElement('p');
   const episodeImg = document.createElement('img');
-  const episodeSummaryEleP = document.createElement('div');
+  const episodeSummaryEleDiv = document.createElement('div');
+  const episodeHolderDiv = document.createElement('div')
 
-  episodeEleDiv.classList.add('episode','lg-col-4');
+  let classToAdd = ['col-12','sm-col-12','md-col-12','lg-col-3','holder']
+  episodeEleDiv.classList.add(...classToAdd);
+  episodeHolderDiv.classList.add('episode')
 
+  
   episodeNameEleP.classList.add('episode-title');
-
-  episodeSummaryEleP.classList.add('episode-summary');
-
-  divElem.append(episodeEleDiv);
-
-  episodeEleDiv.append(episodeNameEleP, episodeImg, episodeSummaryEleP);
-
+  episodeSummaryEleDiv.classList.add('episode-summary');
+   divElem.append(episodeEleDiv);
+  episodeEleDiv.append(episodeHolderDiv,episodeNameEleP, episodeImg, episodeSummaryEleDiv);
+ 
   const showName = Episode.name;
   const seasonNo = Episode.season.toString().padStart(2, '0');
-
   const EpisodeNo = Episode.number.toString().padStart(2, '0');
 
   episodeNameEleP.textContent = `${showName} - S${seasonNo} E${EpisodeNo}`;
 
-  episodeImg.setAttribute('src', `${Episode.image.medium}`);
+  episodeImg.setAttribute('src',`${Episode.image.medium}`);
 
-  episodeSummaryEleP.innerHTML = `${Episode.summary}`;
+  episodeSummaryEleDiv.textContent = `${Episode.summary}`;
 }
 function showAllEpisodeInfo(episodeList) {
   return episodeList.forEach((episode) => showEpisodeInfo(episode));
@@ -68,19 +67,19 @@ function showMatchEpisodeInfo(episodeList) {
 
 const displaySearchEpisode = (episodeList) => {
   const htmlString = episodeList.map((episode) => {
-    return `<div class='col-12 sm-col-12 md-col-12 lg-col-3 episode'>
+    return `<div class='col-12 sm-col-12 md-col-12 lg-col-3 holder'>
+    <div class='episode'>
       <p class='episode-title'>${
         episode.name
-      }-S${episode.season
-      .toString()
-      .padStart(2, '0')}-E${episode.number.toString().padStart(2, '0')}</p>
-              
+      }-S${episode.season.toString()
+      .padStart(2,'0')}-E${episode.number.toString().padStart(2,'0')}</p>
       <img src='${episode.image.medium}'></img>
       <div class='episode-summary'>${episode.summary}</div>
+      </div>
       </div>`;
-  });
-
-  document.querySelector('.show-start').innerHTML = htmlString;
+  })
+  let myString=htmlString.toString().replace (/,/g, "") 
+  document.querySelector('.show-start').innerHTML = myString
 };
 
 function searchingEpisode(episodeList) {
@@ -108,9 +107,9 @@ function select(episodeList) {
   const selectForm = document.getElementById('select');
   episodeList.forEach((episode) => {
     const option = document.createElement('option');
-    option.setAttribute('value', `${episode.name}`);
+    option.setAttribute('value',`${episode.name}`);
     selectForm.append(option);
-    option.innerHTML = `S${episode.season
+    option.innerHTML =`S${episode.season
       .toString()
       .padStart(2, '0')}-E${episode.number.toString().padStart(2, '0')}-
       ${episode.name}`;
