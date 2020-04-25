@@ -21,7 +21,7 @@ function showEpisodeInfo(episode) {
   const episodeImg = document.createElement('img');
   const episodeSummaryEleDiv = document.createElement('div');
   const episodeHolderDiv = document.createElement('div')
-  let classToAdd = ['col-12','sm-col-12','md-col-12','lg-col-3','holder']
+  let classToAdd = ['col-12','sm-col-12','md-col-12','lg-col-3','episode-holder']
   episodeEleDiv.classList.add(...classToAdd);
   episodeHolderDiv.classList.add('episode')
   episodeNameEleP.classList.add('episode-title');
@@ -62,7 +62,7 @@ function showMatchEpisodeInfo(episodeList) {
 
 const displaySearchEpisode = (episodeList) => {
   const htmlString = episodeList.map((episode) => {
-    return `<div class='col-12 sm-col-12 md-col-12 lg-col-3 holder'>
+    return `<div class='col-12 sm-col-12 md-col-12 lg-col-3 episode-holder'>
     <div class='episode'>
       <p class='episode-title'>${
         episode.name

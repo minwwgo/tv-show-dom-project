@@ -12,9 +12,7 @@
 
   <body>
     <div class='container search-box'>
-      <h1>    <a href='https://www.tvmaze.com/'> all the data originally come from tvmaze.com </a>
-      </h1>
-      <div class='row'>
+      <div class='row search-bar'>
         <div class='col-12 sm-col-12 md-col-12 lg-col-6 holder'>
             <label for='shows'> Select show :</label>
             <select id='shows' name='showListHolder'>
@@ -27,7 +25,7 @@
               <option value='' id='selectAll'>All episodes</option>
             </select>
           </div>
-          <div class='col-12 sm-col-12 md-col-12 lg-col-12 holder'>
+          <div class='col-12 sm-col-12 md-col-12 lg-col-6 holder'>
             <div class='search-input'>
               <label for=''> Search: </label>
               <input
@@ -38,6 +36,10 @@
               />
               <p class='searchList'></p>
             </div>
+          </div>
+          <div class='col-12 sm-col-12 md-col-12 lg-col-6 holder tv-link'>
+            <p><a href='https://www.tvmaze.com/'> tvmaze.com </a>
+            </p>
           </div>
         </div>
     </div>

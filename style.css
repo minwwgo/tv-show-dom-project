@@ -15,9 +15,39 @@ input,select{
   font-weight: bolder;
 }
 img{
-  width:100%
+  width:100%;
+  border:2px solid white;
+  transition: transform 0.25s ease;
+}
+img:hover{
+transform:scale(1.1);
+position:relative;
+z-index: 1;
+cursor:pointer;
+}
+.episode-holder{
+  display: flex;
+  opacity:0.90;
+  transition: transform 0.25s ease;
+}
+.episode-holder:hover{
+  transform:scale(1.1);
+  opacity:1;
+  position:relative;
+  z-index: 1;
+  cursor:grab;
+
 }
 
+  .search-bar{
+   margin-top: 10px;
+  }
+
+.search-box{
+    display:flex;
+    background-color: thistle;
+    
+}
 .search-input{
   display:flex;
   justify-content: center;
@@ -25,10 +55,7 @@ img{
   text-align: center;
   
 }
-.search-input input{
-  width:100%;
-  margin:0 10px;
-}
+
 
 .episode{
   border: 1px solid black;
@@ -47,8 +74,4 @@ img{
   padding:5px;
   text-align: center;
   margin:3px auto;
-}
-.holder{
-  display:flex;
-
 }
