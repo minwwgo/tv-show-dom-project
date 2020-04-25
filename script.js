@@ -14,34 +14,29 @@ function setup() {
   // oneShowDisplay(showOne)
 }
 
-function showEpisodeInfo(Episode) {
+function showEpisodeInfo(episode) {
   const divElem = document.querySelector('.show-start');
   const episodeEleDiv = document.createElement('div');
   const episodeNameEleP = document.createElement('p');
   const episodeImg = document.createElement('img');
   const episodeSummaryEleDiv = document.createElement('div');
   const episodeHolderDiv = document.createElement('div')
-
   let classToAdd = ['col-12','sm-col-12','md-col-12','lg-col-3','holder']
   episodeEleDiv.classList.add(...classToAdd);
   episodeHolderDiv.classList.add('episode')
-
-  
   episodeNameEleP.classList.add('episode-title');
   episodeSummaryEleDiv.classList.add('episode-summary');
-   divElem.append(episodeEleDiv);
+  divElem.append(episodeEleDiv);
   episodeEleDiv.append(episodeHolderDiv,episodeNameEleP, episodeImg, episodeSummaryEleDiv);
- 
-  const showName = Episode.name;
-  const seasonNo = Episode.season.toString().padStart(2, '0');
-  const EpisodeNo = Episode.number.toString().padStart(2, '0');
-
-  episodeNameEleP.textContent = `${showName} - S${seasonNo} E${EpisodeNo}`;
-
-  episodeImg.setAttribute('src',`${Episode.image.medium}`);
-
-  episodeSummaryEleDiv.textContent = `${Episode.summary}`;
+  const showName = episode.name;
+  const seasonNo = episode.season.toString().padStart(2, '0');
+  const episodeNo = episode.number.toString().padStart(2, '0');
+  episodeNameEleP.textContent = `${showName} - S${seasonNo} E${episodeNo}`;
+  // episodeImg.setAttribute('src',`${episode.image.medium}`);
+  episodeImg.src =`${episode.image ? episode.image.medium :"https://askleo.com/wp-content/uploads/2013/07/image_not_found.png}" }`;
+  episodeSummaryEleDiv.textContent = `${episode.summary}`;
 }
+
 function showAllEpisodeInfo(episodeList) {
   return episodeList.forEach((episode) => showEpisodeInfo(episode));
 }
@@ -49,12 +44,12 @@ function showAllEpisodeInfo(episodeList) {
 function showMatchEpisodeInfo(episodeList) {
   const input = document.querySelector('.input-search');
   const matchingEpisode = episodeList.filter((episode) => {
+     
     const searchInfo = input.value.toLowerCase();
     const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
-    const matchEpisodeSummary = episode.summary
-      .toLowerCase()
-      .includes(searchInfo);
-    if (matchEpisodeName || matchEpisodeSummary) {
+    episode.summary ? episode.summary.toLowerCase().includes(searchInfo) : null;
+
+    if (matchEpisodeName || episode.summary) {
       return episode;
     }
   });
@@ -73,7 +68,7 @@ const displaySearchEpisode = (episodeList) => {
         episode.name
       }-S${episode.season.toString()
       .padStart(2,'0')}-E${episode.number.toString().padStart(2,'0')}</p>
-      <img src='${episode.image.medium}'></img>
+      <img src ='${episode.image ? episode.image.medium : "https://askleo.com/wp-content/uploads/2013/07/image_not_found.png" }'/>
       <div class='episode-summary'>${episode.summary}</div>
       </div>
       </div>`;
@@ -84,20 +79,20 @@ const displaySearchEpisode = (episodeList) => {
 
 function searchingEpisode(episodeList) {
   const input = document.querySelector('.input-search');
-  input.addEventListener('keyup', () => {
+
+    input.addEventListener('keyup', () => {
     const matchingEpisode = episodeList.filter((episode) => {
+      
       const searchInfo = input.value.toLowerCase();
       const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
-      const matchEpisodeSummary = episode.summary
-        .toLowerCase()
-        .includes(searchInfo);
+      const matchEpisodeSummary = episode.summary.toLowerCase().includes(searchInfo);
+      
       if (matchEpisodeName || matchEpisodeSummary) {
         return episode;
       }
     });
-    document.querySelector(
-      '.searchList'
-    ).innerHTML = `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
+    document.querySelector('.searchList').innerHTML = 
+    `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
 
     return displaySearchEpisode(matchingEpisode);
   });
@@ -105,20 +100,24 @@ function searchingEpisode(episodeList) {
 
 function select(episodeList) {
   const selectForm = document.getElementById('select');
+
   episodeList.forEach((episode) => {
     const option = document.createElement('option');
+    
     option.setAttribute('value',`${episode.name}`);
+    
     selectForm.append(option);
-    option.innerHTML =`S${episode.season
-      .toString()
-      .padStart(2, '0')}-E${episode.number.toString().padStart(2, '0')}-
-      ${episode.name}`;
+
+    option.innerHTML =`
+      S${episode.season.toString().padStart(2, '0')}
+      -E${episode.number.toString().padStart(2, '0')}
+        -${episode.name}`;
   });
 }
 
 function selectEpisodeInfo(episodeList) {
   const selectForm = document.getElementById('select');
-  selectForm.addEventListener('change', (e) => {
+    selectForm.addEventListener('change', (e) => {
     const selectMatchEpisode = episodeList.filter((episode) => {
       if (episode.name.toLowerCase().includes(e.target.value.toLowerCase())) {
         return episode;
@@ -147,6 +146,7 @@ function allShowInfo(showList) {
 function selectShow(showList) {
   shows.addEventListener('change', (e) => {
     let showEpisode = document.getElementById('select');
+
     while (showEpisode.firstChild) {
       showEpisode.removeChild(showEpisode.lastChild);
     }
@@ -172,11 +172,13 @@ function showEpisodeDisplay(showId) {
       select(data);
       selectEpisodeInfo(data);
       searchingEpisode(data);
+      console.log(data)
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error)
     });
 }
+
 console.log();
 function sortOption() {
   const shows = document.getElementById('shows');
