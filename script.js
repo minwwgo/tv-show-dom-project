@@ -1,17 +1,17 @@
 //You can edit ALL of the code here
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  showAllEpisodeInfo(allEpisodes);
-  showMatchEpisodeInfo(allEpisodes);
-  searchingEpisode(allEpisodes);
-  select(allEpisodes);
-  selectEpisodeInfo(allEpisodes);
-  const allShowList = getAllShows();
-  allShowInfo(allShowList);
-  selectShow(allShowList);
-  sortOption();
-  // const showOne = getOneShow();
-  // oneShowDisplay(showOne)
+  // const allEpisodes = getAllEpisodes();
+  // showAllEpisodeInfo(allEpisodes);
+  // showMatchEpisodeInfo(allEpisodes);
+  // searchingEpisode(allEpisodes);
+  // select(allEpisodes);
+  // selectEpisodeInfo(allEpisodes);
+  // const allShowList = getAllShows();
+  // allShowInfo(allShowList);
+  // selectShow(allShowList);
+  // sortOption();
+  const showOne = getOneShow();
+  oneShowDisplay(showOne)
 }
 
 function showEpisodeInfo(episode) {
@@ -172,14 +172,14 @@ function showEpisodeDisplay(showId) {
       select(data);
       selectEpisodeInfo(data);
       searchingEpisode(data);
-      console.log(data)
+      
     })
     .catch((error) => {
       console.log(error)
     });
 }
 
-console.log();
+
 function sortOption() {
   const shows = document.getElementById('shows');
   const sortedOption = Array.from(shows.options).sort((a, b) => {
@@ -193,8 +193,7 @@ function sortOption() {
 function oneShowDisplay(show) {
   const showHolder = document.querySelector('.show-start');
   const showName = document.createElement('h1');
-  const showNameTxt = document.createTextNode(`
-  ${show.name}`);
+  const showNameTxt = document.createTextNode(`${show.name}`);
   showName.appendChild(showNameTxt);
   const showContent = document.createElement('div');
   const showImage = document.createElement('img');
