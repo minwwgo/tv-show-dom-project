@@ -1,17 +1,17 @@
 //You can edit ALL of the code here
 function setup() {
-  // const allEpisodes = getAllEpisodes();
-  // showAllEpisodeInfo(allEpisodes);
-  // showMatchEpisodeInfo(allEpisodes);
-  // searchingEpisode(allEpisodes);
-  // select(allEpisodes);
-  // selectEpisodeInfo(allEpisodes);
-  // const allShowList = getAllShows();
-  // allShowInfo(allShowList);
-  // selectShow(allShowList);
-  // sortOption();
-  const showOne = getOneShow();
-  oneShowDisplay(showOne)
+  const allEpisodes = getAllEpisodes();
+  showAllEpisodeInfo(allEpisodes);
+  showMatchEpisodeInfo(allEpisodes);
+  searchingEpisode(allEpisodes);
+  select(allEpisodes);
+  selectEpisodeInfo(allEpisodes);
+  const allShowList = getAllShows();
+  allShowInfo(allShowList);
+  selectShow(allShowList);
+  sortOption();
+  // const showOne = getOneShow();
+  // oneShowDisplay(showOne)
 }
 
 function showEpisodeInfo(episode) {
@@ -43,20 +43,18 @@ function showAllEpisodeInfo(episodeList) {
 
 function showMatchEpisodeInfo(episodeList) {
   const input = document.querySelector('.input-search');
-  const matchingEpisode = episodeList.filter((episode) => {
-     
+    const matchingEpisode = episodeList.filter((episode) => {
     const searchInfo = input.value.toLowerCase();
     const matchEpisodeName = episode.name.toLowerCase().includes(searchInfo);
-    episode.summary ? episode.summary.toLowerCase().includes(searchInfo) : null;
-
-    if (matchEpisodeName || episode.summary) {
-      return episode;
-    }
+      episode.summary ? episode.summary.toLowerCase().includes(searchInfo) : null;
+      if (matchEpisodeName || episode.summary) {
+        return episode;
+      }
   });
-
-  document.querySelector(
+    document.querySelector(
     '.searchList'
   ).innerHTML = `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
+  // return showAllEpisodeInfo(matchingEpisode)
   return displaySearchEpisode(matchingEpisode);
 }
 
@@ -72,7 +70,7 @@ const displaySearchEpisode = (episodeList) => {
       <div class='episode-summary'>${episode.summary}</div>
       </div>
       </div>`;
-  })
+    })
   let myString=htmlString.toString().replace (/,/g, "") 
   document.querySelector('.show-start').innerHTML = myString
 };
