@@ -53,7 +53,7 @@ function showMatchEpisodeInfo(episodeList) {
   });
     document.querySelector(
     '.searchList'
-  ).innerHTML = `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
+  ).innerHTML = `${matchingEpisode.length} | ${episodeList.length}`;
    
   return displaySearchEpisode(matchingEpisode);
 }
@@ -90,7 +90,7 @@ function searchingEpisode(episodeList) {
       }
     });
     document.querySelector('.searchList').innerHTML = 
-    `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
+    `${matchingEpisode.length} / ${episodeList.length}`;
 
     return displaySearchEpisode(matchingEpisode);
   });
@@ -123,7 +123,7 @@ function selectEpisodeInfo(episodeList) {
     });
     document.querySelector(
       '.searchList'
-    ).innerHTML = `Displaying ${selectMatchEpisode.length} / ${episodeList.length} episodes`;
+    ).innerHTML = `${selectMatchEpisode.length} / ${episodeList.length}`;
 
     return displaySearchEpisode(selectMatchEpisode);
   });
