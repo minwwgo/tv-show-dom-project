@@ -54,7 +54,7 @@ function showMatchEpisodeInfo(episodeList) {
     document.querySelector(
     '.searchList'
   ).innerHTML = `Displaying ${matchingEpisode.length} / ${episodeList.length} episodes`;
-  // return showAllEpisodeInfo(matchingEpisode)
+   
   return displaySearchEpisode(matchingEpisode);
 }
 
