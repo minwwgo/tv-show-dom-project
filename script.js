@@ -10,9 +10,7 @@ function setup() {
   allShowInfo(allShowList);
   selectShow(allShowList);
   sortOption();
-  // const showOne = getOneShow();
-  // oneShowDisplay(showOne)
-}
+  }
 
 function showEpisodeInfo(episode) {
   const divElem = document.querySelector('.show-start');
@@ -188,19 +186,5 @@ function sortOption() {
   sortedOption.forEach((option) => shows.add(option));
 }
 //lv005
-function oneShowDisplay(show) {
-  const showHolder = document.querySelector('.show-start');
-  const showName = document.createElement('h1');
-  const showNameTxt = document.createTextNode(`${show.name}`);
-  showName.appendChild(showNameTxt);
-  const showContent = document.createElement('div');
-  const showImage = document.createElement('img');
-  showImage.setAttribute('src', `${show.image.medium}`);
-  // const showSummary= document.createElement('p')
-  // const showDescription= document.createElement('ul')
-  // showHolder.append(showName,showImage,showSummary,showDescription)
-  showHolder.append(showName,showImage);
-  console.log(showNameTxt);
-}
 
 window.onload = setup;
