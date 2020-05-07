@@ -161,7 +161,7 @@ function selectShow(showList) {
 
 function showEpisodeDisplay(showId) {
   fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
-    .then((res) => res.json())
+    .then((res) =>{return res.json()})
     .then((data) => {
       showAllEpisodeInfo(data);
       showMatchEpisodeInfo(data);
