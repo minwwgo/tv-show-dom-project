@@ -36,7 +36,8 @@ function showEpisodeInfo(episode) {
 }
 
 function showAllEpisodeInfo(episodeList) {
-  return episodeList.forEach((episode) => showEpisodeInfo(episode));
+  displaySearchEpisode(episodeList)
+  // return episodeList.forEach((episode) => showEpisodeInfo(episode));
 }
 
 function showMatchEpisodeInfo(episodeList) {
