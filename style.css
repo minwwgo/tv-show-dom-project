@@ -1,3 +1,95 @@
-#root {
-  color: red;
+
+
+body{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  background-color:#FFF1BE ;
+  
+}
+input,select{
+  border:1px solid black;
+  border-radius: 5px;
+  width:50%;
+  font-size:1rem;
+  font-weight: bolder;
+}
+img{
+  width:100%;
+  padding:10px;
+  
+}
+header{
+  background:#26191b;
+ 
+  z-index: 10;
+  position:sticky;
+  top:0;
+  width: 100%;
+ 
+}
+.nav{
+  display:flex;
+  flex:wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin:0 auto;
+
+}
+header div{
+  color:white;
+  margin-top:10px;
+}
+.link a {
+  color:white;
+  text-decoration: none;
+}
+
+.episode-holder{
+  display: flex;
+  opacity:0.90;
+  transition: transform 0.25s ease;
+  
+}
+.episode-holder:hover{
+  transform:scale(1.05);
+  opacity:1;
+  position:relative;
+  z-index: 1;
+  cursor:grab;
+
+}
+.holder{
+  top:0;
+}
+.search-input{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.episode{
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #26191b;
+  text-align: center;
+  margin-top:25px;
+  height:500px;
+  overflow: auto;
+}
+
+ .episode-summary{
+  color:white;
+}
+.episode-title{
+  background-color:wheat;
+  color:black;
+  width:100%;
+  padding:5px;
+  text-align: center;
+  margin:3px auto;
+}
+.display-total{
+  width:100px;
 }

@@ -1,21 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
-    <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>TV Show Project | MinKo (minwwgo)</title>
+    <link rel='stylesheet' type='text/css' href='grid.css' />
+
+    <link href='style.css' rel='stylesheet' />
+    <link rel='icon' href='/favicon.ico' type='image/x-icon' />
   </head>
 
   <body>
-    <div id="root">
+      <header>
+        
+          <div class="row nav">
+            <div class="col-12 sm-col-12 md-col-12 lg-col-3 select-show">
+              
+              <select id='shows' name='showListHolder'>
+              <option value='' id='selectAllShow'>-All shows</option>
+              </select>
+            </div>
+            <div class=" col-12 sm-col-12 md-col-12 lg-col-3 select-episode">
+               
+                <select name='episodeListHolder' id='select'>
+                <option value='' id='selectAll'>All episodes</option>
+                </select>
+            </div>
+         
+          
+            
+          
+            <div class='col-12 sm-col-12 md-col-12 lg-col-3 search-input'>
+              
+              <input
+                class='input-search'
+                type='text'
+                name='searchbox'
+                placeholder='search'
+              />
+              
+            </div>
+            <div class="col-12 sm-col-12 md-col-12 lg-col-3 display-total">
+              <p class='searchList'></p>
+              <div class='col-12 sm-col-12 md-col-12 lg-col-3 link'>
+                <a href='https://www.tvmaze.com/'> tvmaze.com </a>
+               
+              </div>
+            </div>
+          
+          
+          
+          
+          
+        </div>
+        
+        
+    
+      </header>
+    
+           
+    
+    <div class='container holder'>
+      <div class='row show-start'>
+       
     </div>
-
+    <!-- <div class=" col-12 sm-col-12 md-col-12 lg-col-12"></div>
+         
+  </div> -->
+    <script src='shows.js'></script>
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <script src='episodes.js'></script>
 
     <!-- Loads YOUR javascript code -->
-    <script src="script.js"></script>
+    <script src='script.js'></script>
+    <!-- <script src='test.js'></script> -->
   </body>
 </html>
